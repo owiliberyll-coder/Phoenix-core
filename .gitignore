@@ -1,53 +1,28 @@
-# Prerequisites
-*.d
-
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
+# Python
+__pycache__/
+*.py[cod]
 *.so
-*.so.*
-*.dylib
+.Python
+*.egg-info/
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+# Images
+*.jpg
+*.jpeg
+*.png
+capture.jpg
+temp_*.jpg
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+# Build
+*.o
+simple_detector
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
+# Termux
+*.log
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
 Mkfile.old
 dkms.conf
 

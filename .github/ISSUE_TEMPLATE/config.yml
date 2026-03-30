@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security Issue
+    url: https://github.com/owiliberyll-coder/phoenix-core/security/advisories
+    about: Report security vulnerabilities privately
+  - name: Discussion
+    url: https://github.com/owiliberyll-coder/phoenix-core/discussions
+    about: Ask questions or discuss ideas
+  - name: Email Support
+    url: mailto:owiliberyll@gmail.com
+    about: Direct contact with maintainers
