@@ -1,0 +1,31 @@
+# Phoenix Core Code Ownership
+
+# Global ownership
+*                   @owiliberyll-coder
+
+# Kernel module
+/kernel/            @owiliberyll-coder
+
+# Documentation
+/docs/              @owiliberyll-coder
+*.md                @owiliberyll-coder
+SECURITY.md         @owiliberyll-coder
+CONTRIBUTING.md     @owiliberyll-coder
+
+# CI/CD
+/.github/           @owiliberyll-coder
+
+# Python scanners
+fast_scanner.py     @owiliberyll-coder
+simple_auto.py      @owiliberyll-coder
+python_scanner.py   @owiliberyll-coder
+
+# C detector
+simple_detector.c   @owiliberyll-coder
+
+# Installation
+install.sh          @owiliberyll-coder
+
+# License and configuration
+LICENSE             @owiliberyll-coder
+.gitignore          @owiliberyll-coder
