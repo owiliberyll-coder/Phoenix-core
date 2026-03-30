@@ -1,12 +1,6 @@
 /*
- * Phoenix Core - Kernel Module
+ * Phoenix Core - Kernel Module (Fixed for Linux 6.8+)
  * Digital sovereignty engine at the kernel level
- * 
- * Copyright (C) 2024 Phoenix Core Contributors
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; version 3 of the License.
  */
 
 #include <linux/module.h>
@@ -23,28 +17,27 @@
 #include <media/v4l2-ioctl.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Phoenix Core Contributors");
-MODULE_DESCRIPTION("Kernel-level digital sovereignty engine");
-MODULE_VERSION("0.1.0");
+MODULE_AUTHOR("owiliberyll-coder");
+MODULE_DESCRIPTION("Phoenix Core - Digital Sovereignty Engine");
+MODULE_VERSION("0.3.0");
 
 /* Module parameters */
-static int debug = 0;
+static int debug = 1;
 module_param(debug, int, 0644);
 MODULE_PARM_DESC(debug, "Enable debug output (0=off, 1=on)");
 
-/* Device configuration */
 #define DEVICE_NAME "phoenix_core"
 #define CLASS_NAME "phoenix"
 #define BUFFER_SIZE 4096
 
 /* Audit log entry structure */
 struct phoenix_audit_entry {
-    pid_t pid;                      /* Process ID */
-    char comm[TASK_COMM_LEN];       /* Process name */
-    unsigned long timestamp;        /* Timestamp in seconds */
-    unsigned int nudity_score;      /* Detection score (0-100) */
-    char action[32];                /* Action taken (block/allow/blur) */
-    struct list_head list;          /* Linked list */
+    pid_t pid;
+    char comm[TASK_COMM_LEN];
+    unsigned long timestamp;
+    unsigned int nudity_score;
+    char action[32];
+    struct list_head list;
 };
 
 /* Device structure */
@@ -61,7 +54,6 @@ struct phoenix_device {
 static struct phoenix_device *phoenix_dev;
 static struct class *phoenix_class;
 
-/* Debug logging macro */
 #define PHOENIX_DEBUG(fmt, ...) \
     if (debug) \
         printk(KERN_DEBUG "phoenix_core: " fmt, ##__VA_ARGS__)
@@ -93,11 +85,10 @@ static ssize_t phoenix_read(struct file *file, char __user *buf,
     int ret = 0;
     
     if (*off > 0)
-        return 0;  /* EOF */
+        return 0;
     
     mutex_lock(&dev->lock);
     
-    /* Format audit log entries */
     list_for_each_entry(entry, &dev->audit_log, list) {
         output_len = snprintf(output, sizeof(output),
                               "PID: %d, Process: %s, Time: %lu, Score: %u, Action: %s\n",
@@ -129,7 +120,6 @@ static ssize_t phoenix_write(struct file *file, const char __user *buf,
     if (copy_from_user(kernel_buf, buf, len))
         return -EFAULT;
     
-    /* Parse detection score from userspace */
     if (sscanf(kernel_buf, "%d", &score) == 1) {
         struct phoenix_audit_entry *entry;
         
@@ -167,13 +157,13 @@ static long phoenix_ioctl(struct file *file, unsigned int cmd,
     int ret = 0;
     
     switch (cmd) {
-        case 0x1000:  /* Get statistics */
+        case 0x1000:
             if (copy_to_user((void __user *)arg, &dev->block_count, 
                             sizeof(dev->block_count)))
                 ret = -EFAULT;
             break;
             
-        case 0x1001:  /* Reset statistics */
+        case 0x1001:
             mutex_lock(&dev->lock);
             dev->block_count = 0;
             dev->frame_count = 0;
@@ -187,7 +177,6 @@ static long phoenix_ioctl(struct file *file, unsigned int cmd,
     return ret;
 }
 
-/* File operations structure */
 static struct file_operations phoenix_fops = {
     .owner = THIS_MODULE,
     .open = phoenix_open,
@@ -197,16 +186,7 @@ static struct file_operations phoenix_fops = {
     .unlocked_ioctl = phoenix_ioctl,
 };
 
-/* V4L2 hook (to be implemented) */
-static int phoenix_v4l2_hook(struct file *file, void *fh, 
-                              struct v4l2_buffer *buf)
-{
-    /* TODO: Hook into camera buffer before display */
-    PHOENIX_DEBUG("Camera buffer captured\n");
-    return 0;
-}
-
-/* Module initialization */
+/* Module initialization - FIXED for Linux 6.8+ */
 static int __init phoenix_init(void)
 {
     int ret;
@@ -242,8 +222,8 @@ static int __init phoenix_init(void)
         return ret;
     }
     
-    /* Create device class */
-    phoenix_class = class_create(THIS_MODULE, CLASS_NAME);
+    /* Create device class - FIXED: class_create now takes only one argument */
+    phoenix_class = class_create(CLASS_NAME);
     if (IS_ERR(phoenix_class)) {
         cdev_del(&phoenix_dev->cdev);
         kfree(phoenix_dev);
