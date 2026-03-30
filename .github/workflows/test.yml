@@ -1,77 +1,127 @@
-name: Tests
+name: Phoenix Core Tests
 
 on:
   push:
     branches: [ main, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly Sunday tests
 
 jobs:
-  test:
+  test-python:
+    name: Test Python Scanner
     runs-on: ubuntu-latest
+    
     strategy:
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
-
+    
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install numpy pillow
+        pip install numpy pillow opencv-python
+        pip install pytest pytest-cov
     
-    - name: Check Python syntax
-      run: |
-        python -m py_compile fast_scanner.py
-        python -m py_compile simple_auto.py
-        python -m py_compile python_scanner.py
+    - name: Create test directory
+      run: mkdir -p test_images
     
-    - name: Build C detector
+    - name: Run Python tests
       run: |
-        gcc -Wall -Wextra simple_detector.c -o simple_detector || true
+        pytest tests/ -v --cov=. --cov-report=xml
     
-    - name: Check shell scripts
-      run: |
-        # Check shell syntax
-        bash -n install.sh
-    
-    - name: Lint with flake8
-      run: |
-        pip install flake8
-        flake8 fast_scanner.py simple_auto.py python_scanner.py --max-line-length=100 || true
+    - name: Upload coverage
+      uses: codecov/codecov-action@v4
+      with:
+        file: ./coverage.xml
+        fail_ci_if_error: false
 
-  kernel-build:
+  test-c-compile:
+    name: Test C Compilation
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
-    - name: Install build essentials
+    - name: Install build tools
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential linux-headers-generic
+        sudo apt-get install -y build-essential
     
-    - name: Check kernel module syntax
+    - name: Compile C detector
       run: |
-        cd kernel && make clean || true
+        gcc -o simple_detector simple_detector.c -Wall -Wextra
+        echo "✅ Compiled successfully"
+    
+    - name: Check binary
+      run: |
+        file simple_detector
+        ls -lh simple_detector
 
-  security:
+  lint-python:
+    name: Lint Python Code
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
-    - name: Run Trivy security scan
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install linters
+      run: |
+        pip install flake8 black mypy
+    
+    - name: Run flake8
+      run: flake8 *.py --max-line-length=120 --ignore=E501,W503
+    
+    - name: Run black check
+      run: black --check *.py
+    
+    - name: Run mypy
+      run: mypy *.py --ignore-missing-imports
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
         scan-type: 'fs'
         scan-ref: '.'
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-      continue-on-error: true
+        format: 'table'
+        exit-code: '1'
+        severity: 'CRITICAL,HIGH'
+
+  notify:
+    name: Notify on Failure
+    needs: [test-python, test-c-compile, lint-python, security-scan]
+    if: failure()
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Create issue on failure
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: '❌ CI Pipeline Failed',
+            body: 'The CI pipeline failed. Please check the workflow logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}',
+            labels: ['bug', 'ci-failure']
+          })

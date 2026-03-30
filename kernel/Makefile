@@ -1,42 +1,21 @@
-# Makefile for Phoenix Core Kernel Module
+obj-m += phoenix_core.o
 
-KERNEL_BUILD_DIR ?= /lib/modules/$(shell uname -r)/build
-
-MODULE_NAME = phoenix_core
-SOURCE = phoenix_core.c
-
-obj-m += $(MODULE_NAME).o
+KERNEL_DIR = /lib/modules/$(shell uname -r)/build
+PWD := $(shell pwd)
 
 all:
-	@echo "Building Phoenix Core kernel module..."
-	make -C $(KERNEL_BUILD_DIR) M=$(PWD) modules
+	$(MAKE) -C $(KERNEL_DIR) M=$(PWD) modules
 
 clean:
-	@echo "Cleaning build artifacts..."
-	make -C $(KERNEL_BUILD_DIR) M=$(PWD) clean
-	rm -f $(MODULE_NAME).ko $(MODULE_NAME).o $(MODULE_NAME).mod.o $(MODULE_NAME).mod.c Module.symvers modules.order
+	$(MAKE) -C $(KERNEL_DIR) M=$(PWD) clean
 
 install:
-	@echo "Installing kernel module..."
-	sudo make -C $(KERNEL_BUILD_DIR) M=$(PWD) modules_install
-	sudo depmod -a
+	sudo insmod phoenix_core.ko
 
-load:
-	@echo "Loading kernel module..."
-	sudo insmod $(MODULE_NAME).ko
+remove:
+	sudo rmmod phoenix_core
 
-unload:
-	@echo "Unloading kernel module..."
-	sudo rmmod $(MODULE_NAME) || true
+info:
+	modinfo phoenix_core.ko
 
-reload: unload load
-
-status:
-	@echo "Module status:"
-	lsmod | grep phoenix_core || echo "Module not loaded"
-	
-dmesg:
-	@echo "Recent kernel messages:"
-	dmesg | tail -20
-
-.PHONY: all clean install load unload reload status dmesg
+.PHONY: all clean install remove info

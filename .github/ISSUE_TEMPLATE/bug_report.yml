@@ -1,96 +1,78 @@
-name: Bug Report
-description: Report a bug or issue with Phoenix Core
+name: 🐛 Bug Report
+description: Report a bug to help us improve
+title: "[BUG]: "
 labels: ["bug"]
-
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting a bug! Please fill in the details below.
+        Thanks for taking the time to fill out this bug report!
 
   - type: dropdown
-    id: platform
+    id: component
     attributes:
-      label: Platform
-      description: What platform are you using?
+      label: Component
+      description: Which component has the bug?
       options:
-        - Android (Termux)
-        - Linux
-        - Windows (WSL)
-        - macOS
-        - Other
+        - Python Scanner
+        - C Detector
+        - Kernel Module
+        - Android App
+        - Documentation
     validations:
       required: true
 
   - type: input
-    id: python_version
+    id: device
     attributes:
-      label: Python Version
-      description: Output of `python --version`
-      placeholder: "Python 3.11.2"
-
-  - type: input
-    id: termux_environment
-    attributes:
-      label: Termux/Environment Details
-      description: Device model, Android version (if applicable)
-      placeholder: "Pixel 6, Android 13"
+      label: Device Information
+      description: What device are you using?
+      placeholder: "e.g., Samsung Galaxy S21, Android 13, Termux 0.118"
+    validations:
+      required: true
 
   - type: textarea
     id: description
     attributes:
       label: Bug Description
-      description: Clearly describe the bug or issue
-      placeholder: "When I run fast_scanner.py, it crashes with..."
+      description: What happened?
+      placeholder: "When I point the camera at..."
     validations:
       required: true
 
   - type: textarea
-    id: steps_to_reproduce
-    attributes:
-      label: Steps to Reproduce
-      description: How to reproduce the issue
-      placeholder: |
-        1. Run `python fast_scanner.py`
-        2. Wait for 5 seconds
-        3. App crashes
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected_behavior
+    id: expected
     attributes:
       label: Expected Behavior
-      description: What should happen instead?
-      placeholder: "The scanner should continue running..."
+      description: What should have happened?
     validations:
       required: true
 
   - type: textarea
-    id: error_message
+    id: reproduction
     attributes:
-      label: Error Message / Log Output
-      description: Full error message or log output
-      render: shell
+      label: Steps to Reproduce
+      description: How can we reproduce this?
       placeholder: |
-        Traceback (most recent call last):
-          File "fast_scanner.py", line 50, in <module>
-            ...
+        1. Run `python fast_scanner.py`
+        2. Point camera at...
+        3. See error...
+    validations:
+      required: true
 
   - type: textarea
-    id: additional_context
+    id: logs
     attributes:
-      label: Additional Context
-      description: Any other relevant information?
-      placeholder: "Works fine on Python 3.10 but fails on 3.13"
+      label: Logs/Output
+      description: Paste any relevant logs or error messages
+      render: shell
 
-  - type: checkboxes
-    id: checklist
+  - type: dropdown
+    id: severity
     attributes:
-      label: Checklist
+      label: Severity
       options:
-        - label: I've searched existing issues
-          required: true
-        - label: I've provided all relevant information
-          required: true
-        - label: I can reproduce the issue consistently
+        - Critical (System crashes)
+        - High (Feature broken)
+        - Medium (Partial functionality)
+        - Low (Minor issue)

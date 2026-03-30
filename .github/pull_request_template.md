@@ -1,31 +1,28 @@
 ## Description
-Please include a summary of the changes and related context.
+Please include a summary of the change and which issue is fixed.
+
+Fixes #(issue number)
 
 ## Type of Change
-- [ ] Bug fix (non-breaking change that fixes an issue)
-- [ ] New feature (non-breaking change that adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to change)
-- [ ] Documentation update
-
-## Related Issue
-Closes #(issue number)
+- [ ] 🐛 Bug fix
+- [ ] ✨ New feature
+- [ ] 📚 Documentation update
+- [ ] 🔧 Code refactor
+- [ ] ⚡ Performance improvement
+- [ ] 🧪 Test update
 
 ## Testing
-Please describe the tests you ran and how to reproduce the tests:
-- [ ] Test A
-- [ ] Test B
+- [ ] I have tested on Android/Termux
+- [ ] I have tested on Linux
+- [ ] I have added tests that prove my fix works
 
 ## Checklist
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my own code
+- [ ] My code follows the project style guidelines
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings or errors
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] Any dependent changes have been merged and published
+- [ ] My changes generate no new warnings
+- [ ] I have added tests that prove my fix works
 
 ## Screenshots (if applicable)
-Add any relevant screenshots here.
 
 ## Additional Context
-Add any other context about the pull request here.
