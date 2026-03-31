@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix Core - Digital Sovereignty Engine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255,255,255,0.95);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #667eea;
+        }
+        
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        section {
+            background: white;
+            padding: 60px 0;
+        }
+        
+        section:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        
+        .status-working {
+            background: #10b981;
+            color: white;
+        }
+        
+        .status-progress {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .status-planned {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .tech-item {
+            background: #e9ecef;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+        
+        footer {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .header-content { flex-direction: column; gap: 15px; }
+            nav a { margin: 0 15px; }
+            .btn { margin: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🔥 Phoenix Core</h1>
+                    <p>Digital Sovereignty Engine</p>
+                </div>
+                <nav>
+                    <a href="#home">Home</a>
+                    <a href="#problem">Problem</a>
+                    <a href="#solution">Solution</a>
+                    <a href="#status">Status</a>
+                    <a href="#team">Team</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section id="home" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 0;">
+        <div class="container">
+            <div class="hero">
+                <h1>Kernel-Level Protection<br>Against Engineered Addiction</h1>
+                <p>Phoenix Core intercepts explicit content at the operating system's foundation—before any application can access it.</p>
+                <div>
+                    <a href="https://github.com/owiliberyll-coder/Phoenix-core" class="btn btn-primary">GitHub →</a>
+                    <a href="#solution" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="problem">
+        <div class="container">
+            <h2>The Problem</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🎯 Engineered Addiction</h3>
+                    <p>The pornography industry employs top neuroscientists and UX designers to maximize dopamine hijacking and compulsive behavior.</p>
+                </div>
+                <div class="card">
+                    <h3>🚫 Surface Solutions Fail</h3>
+                    <p>Blockers are bypassed, accountability apps rely on shame, and preaching ignores neurological reality.</p>
+                </div>
+                <div class="card">
+                    <h3>📉 Societal Collapse</h3>
+                    <p>Lost productivity, destroyed relationships, compromised mental health, and spiritual decay—especially among youth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="solution" style="background: #f8f9fa;">
+        <div class="container">
+            <h2>The Solution</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🔒 Kernel-Level</h3>
+                    <p>Operates at the foundation of the operating system—unbypassable without physical access and multi-party authorization.</p>
+                    <span class="status-badge status-working">Linux 6.8+ Ready</span>
+                </div>
+                <div class="card">
+                    <h3>📷 V4L2 Camera Hook</h3>
+                    <p>Intercepts frames before any application receives them. Real-time detection at 2-3 FPS with 85% accuracy.</p>
+                    <span class="status-badge status-working">Working Prototype</span>
+                </div>
+                <div class="card">
+                    <h3>🌐 Netfilter Hook</h3>
+                    <p>Blocks explicit content at the packet level—works across all apps (browser, messaging, social media).</p>
+                    <span class="status-badge status-progress">In Development</span>
+                </div>
+                <div class="card">
+                    <h3>📁 File Watcher</h3>
+                    <p>Monitors Downloads, WhatsApp, Telegram folders. Scans existing and new files. Quarantines explicit content.</p>
+                    <span class="status-badge status-planned">Planned</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="status">
+        <div class="container">
+            <h2>Current Status</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>✅ Termux Prototype</h3>
+                    <p>Working Android scanner with real-time detection</p>
+                    <span class="status-badge status-working">Complete</span>
+                </div>
+                <div class="card">
+                    <h3>✅ Skin Detection</h3>
+                    <p>85% accuracy using HSV color analysis</p>
+                    <span class="status-badge status-working">Complete</span>
+                </div>
+                <div class="card">
+                    <h3>✅ C Binary</h3>
+                    <p>Manual verification with no dependencies</p>
+                    <span class="status-badge status-working">Complete</span>
+                </div>
+                <div class="card">
+                    <h3>🔄 Kernel Module</h3>
+                    <p>Skeleton complete, V4L2 hooks in progress</p>
+                    <span class="status-badge status-progress">In Progress</span>
+                </div>
+            </div>
+            
+            <div class="tech-stack">
+                <span class="tech-item">C / Linux Kernel</span>
+                <span class="tech-item">Python / NumPy</span>
+                <span class="tech-item">V4L2 / Netfilter</span>
+                <span class="tech-item">Android / Termux</span>
+                <span class="tech-item">OpenCV / PIL</span>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" style="background: #f8f9fa;">
+        <div class="container">
+            <h2>Team</h2>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="card">
+                    <h3>Collins Omondi</h3>
+                    <p><strong>Lead Developer & Creator</strong></p>
+                    <p>Systems Architect with biomedical background. Kernel module developer, computer vision engineer, open source advocate.</p>
+                    <p style="margin-top: 15px;">
+                        <a href="https://github.com/owiliberyll-coder" style="color: #667eea;">GitHub →</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>Phoenix Core - Digital Sovereignty for All</p>
+            <div class="social-links" style="margin: 20px 0;">
+                <a href="https://github.com/owiliberyll-coder/Phoenix-core">GitHub</a>
+                <a href="#">Discord (Coming Soon)</a>
+                <a href="#">Twitter (Coming Soon)</a>
+            </div>
+            <p style="font-size: 0.9rem;">GNU General Public License v3.0</p>
+            <p style="font-size: 0.8rem; margin-top: 20px;">Contact: owiliberyll@gmail.com</p>
+        </div>
+    </footer>
+</body>
+</html>
