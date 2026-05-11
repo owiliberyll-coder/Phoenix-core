@@ -191,15 +191,34 @@ footer {
     padding: 40px 0;
 }
 
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
 .social-links a {
     color: white;
-    margin: 0 15px;
     text-decoration: none;
 }
 
 @media (max-width: 768px) {
     .hero h1 { font-size: 2rem; }
-    .header-content { flex-direction: column; gap: 15px; }
-    nav a { margin: 0 15px; }
+    .header-content { 
+        flex-direction: column; 
+        text-align: center;
+        gap: 15px; 
+    }
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 15px;
+    }
+    nav a { 
+        margin: 0; 
+    }
     .btn { margin: 10px; }
 }
