@@ -4,30 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phoenix Core - Digital Sovereignty Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .icon {
-            width: 24px;
-            height: 24px;
-            vertical-align: middle;
-            margin-right: 8px;
-            display: inline-block;
-        }
-        .header-icon {
-            width: 28px;
-            height: 28px;
-            color: #ff6b6b;
-        }
-        .logo h1 {
-            display: flex;
-            align-items: center;
-        }
-        .card h3 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -51,14 +31,43 @@
         </div>
     </header>
     
-    <section id="home" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 0;">
+    <section id="home" class="hero-section">
         <div class="container">
-            <div class="hero">
-                <h1>Kernel-Level Protection<br>Against Engineered Addiction</h1>
-                <p>Phoenix Core intercepts explicit content at the operating system's foundation—before any application can access it.</p>
-                <div>
-                    <a href="https://github.com/owiliberyll-coder/Phoenix-core" class="btn btn-primary">GitHub ?</a>
-                    <a href="#solution" class="btn btn-secondary">Learn More</a>
+            <div class="hero-grid">
+                <div class="hero">
+                    <span class="eyebrow">Digital Sovereignty Engine</span>
+                    <h1>Kernel-Level Protection<br>Against Engineered Addiction</h1>
+                    <p>Phoenix Core intercepts explicit content at the OS foundation - before any application can access it.</p>
+                    <div class="hero-actions">
+                        <a href="https://github.com/owiliberyll-coder/Phoenix-core" class="btn btn-primary">GitHub</a>
+                        <a href="#solution" class="btn btn-secondary">Learn More</a>
+                    </div>
+                    <div class="hero-tags">
+                        <span>Linux 6.8+ Ready</span>
+                        <span>Termux Prototype</span>
+                        <span>85% Accuracy</span>
+                    </div>
+                </div>
+                <div class="hero-panel">
+                    <div class="panel-header">
+                        <span class="pulse-dot" aria-hidden="true"></span>
+                        Live Signal
+                    </div>
+                    <div class="panel-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Detection accuracy</span>
+                            <span class="metric-value">~85%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Latency</span>
+                            <span class="metric-value">&lt; 200ms</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Capture rate</span>
+                            <span class="metric-value">2-3 FPS</span>
+                        </div>
+                    </div>
+                    <div class="panel-foot">Kernel module skeleton online, V4L2 hooks in progress.</div>
                 </div>
             </div>
         </div>
@@ -87,13 +96,13 @@
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                         Societal Collapse
                     </h3>
-                    <p>Lost productivity, destroyed relationships, compromised mental health, and spiritual decay—especially among youth.</p>
+                    <p>Lost productivity, destroyed relationships, compromised mental health, and spiritual decay - especially among youth.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <section id="solution" style="background: #f8f9fa;">
+    <section id="solution" class="section-muted">
         <div class="container">
             <h2>The Solution</h2>
             <div class="grid">
@@ -102,7 +111,7 @@
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                         Kernel-Level
                     </h3>
-                    <p>Operates at the foundation of the operating system—unbypassable without physical access and multi-party authorization.</p>
+                    <p>Operates at the foundation of the operating system - unbypassable without physical access and multi-party authorization.</p>
                     <span class="status-badge status-working">Linux 6.8+ Ready</span>
                 </div>
                 <div class="card">
@@ -118,7 +127,7 @@
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                         Netfilter Hook
                     </h3>
-                    <p>Blocks explicit content at the packet level—works across all apps (browser, messaging, social media).</p>
+                    <p>Blocks explicit content at the packet level - works across all apps (browser, messaging, social media).</p>
                     <span class="status-badge status-progress">In Development</span>
                 </div>
                 <div class="card">
@@ -181,17 +190,27 @@
         </div>
     </section>
     
-    <section id="team" style="background: #f8f9fa;">
+    <section id="team" class="section-muted">
         <div class="container">
             <h2>Team</h2>
-            <div style="max-width: 600px; margin: 0 auto;">
-                <div class="card">
-                    <h3>Collins Omondi</h3>
-                    <p><strong>Lead Developer & Creator</strong></p>
-                    <p>Systems Architect with biomedical background. Kernel module developer, computer vision engineer, open source advocate.</p>
-                    <p style="margin-top: 15px;">
-                        <a href="https://github.com/owiliberyll-coder" style="color: #667eea;">GitHub ?</a>
-                    </p>
+            <div class="team-wrap">
+                <div class="team-grid">
+                    <div class="card">
+                        <h3>Collins Omondi</h3>
+                        <p><strong>Lead Developer & Creator</strong></p>
+                        <p>Systems Architect with biomedical background. Kernel module developer, computer vision engineer, open source advocate.</p>
+                        <p class="team-link">
+                            <a href="https://github.com/owiliberyll-coder" class="inline-link">GitHub</a>
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>Antech Greyhat</h3>
+                        <p><strong>Backend Developer & Penetration Tester</strong></p>
+                        <p>Backend engineering, security testing, and hardening for production-ready defenses.</p>
+                        <p class="team-link">
+                            <a href="https://github.com/Antech-greyhat" class="inline-link">GitHub</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -200,13 +219,13 @@
     <footer>
         <div class="container">
             <p>Phoenix Core - Digital Sovereignty for All</p>
-            <div class="social-links" style="margin: 20px 0;">
+            <div class="social-links">
                 <a href="https://github.com/owiliberyll-coder/Phoenix-core">GitHub</a>
                 <a href="#">Discord (Coming Soon)</a>
                 <a href="#">Twitter (Coming Soon)</a>
             </div>
-            <p style="font-size: 0.9rem;">GNU General Public License v3.0</p>
-            <p style="font-size: 0.8rem; margin-top: 20px;">Contact: owiliberyll@gmail.com</p>
+            <p class="footer-note">GNU General Public License v3.0</p>
+            <p class="footer-note footer-contact">Contact: owiliberyll@gmail.com</p>
         </div>
     </footer>
 </body>
