@@ -6,6 +6,7 @@ Detailed skin detection scanner for Termux with logging and runtime statistics.
 
 import argparse
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -94,7 +95,7 @@ def main():
     args = parse_args()
     print_header()
 
-    if not shutil_which(args.camera_command):
+    if not shutil.which(args.camera_command):
         print(
             f"ERROR: '{args.camera_command}' not found. Install Termux or provide a valid capture command."
         )
@@ -106,7 +107,8 @@ def main():
 
     try:
         while True:
-            path = tempfile.mktemp(suffix=".jpg")
+            fd, path = tempfile.mkstemp(suffix=".jpg")
+            os.close(fd)
             if capture_photo(path, args.camera_command) and os.path.exists(path):
                 try:
                     size = os.path.getsize(path)
@@ -160,14 +162,6 @@ def main():
         if frame_count > 0:
             print(f"Block rate: {block_count / frame_count * 100:.1f}%")
             print(f"Avg FPS: {frame_count / elapsed:.1f}")
-
-
-def shutil_which(command):
-    """Return True when the command exists on PATH."""
-    return any(
-        os.access(os.path.join(path, command), os.X_OK)
-        for path in os.environ.get("PATH", "").split(os.pathsep)
-    )
 
 
 if __name__ == "__main__":
