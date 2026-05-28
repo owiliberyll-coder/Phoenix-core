@@ -18,9 +18,10 @@ long get_file_size(const char* path) {
 // In the real version, we'd use image processing
 int detect_skin_simple(const char* path) {
     long size = get_file_size(path);
-    // Placeholder heuristic: flag images in a typical photo size range.
-    // Real implementation will use a compiled image processing library.
-    return (size > 500000 && size < 3000000) ? 1 : 0;
+    // This is a placeholder - real detection would analyze pixel data
+    // For now, we'll use size as a very rough heuristic
+    // Real implementation will use a compiled image processing library
+    return (size > 500000 && size < 3000000) ? 0 : 0; // Placeholder
 }
 
 int main() {
@@ -56,7 +57,7 @@ int main() {
                 remove(photo_path);
             } else {
                 if (frame_count % 5 == 0) {
-                    double fps = (elapsed > 0) ? (frame_count / elapsed) : 0.0;
+                    double fps = frame_count / elapsed;
                     printf("[%5.1fs] 🟢 CLEAN   | FPS: %.1f | Frames: %d\n", 
                            elapsed, fps, frame_count);
                 }

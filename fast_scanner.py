@@ -110,8 +110,7 @@ def main():
 
     try:
         while True:
-            fd, target_path = tempfile.mkstemp(suffix=".jpg")
-            os.close(fd)
+            target_path = tempfile.mktemp(suffix=".jpg")
             success = capture_image(target_path, args.camera_command)
 
             if success and os.path.exists(target_path) and os.path.getsize(target_path) > 1024:

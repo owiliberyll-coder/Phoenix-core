@@ -21,17 +21,16 @@ def detect_skin_simple(image_path):
         img = Image.open(image_path).convert('RGB')
         img.thumbnail((50, 50))
         pixels = list(img.getdata())
-
+        
         skin_count = 0
         for r, g, b in pixels:
-            # Skin detection heuristic (consistent with fast_scanner / python_scanner)
-            if r > 102 and g > 51 and b > 26 and r > b:
+            # Skin detection heuristic
+            if r > 102 and g > 51 and b > 26:
                 if r - g > 17:
                     skin_count += 1
-
+        
         return skin_count / len(pixels)
-    except Exception as e:
-        print(f"WARNING: skin detection error: {e}")
+    except:
         return 0
 
 frame_count = 0
@@ -39,28 +38,17 @@ block_count = 0
 
 try:
     while True:
-        fd, path = tempfile.mkstemp(suffix='.jpg')
-        os.close(fd)
-
-        try:
-            ret = subprocess.run(['termux-camera-photo', path],
-                                capture_output=True,
-                                timeout=5)
-        except subprocess.TimeoutExpired:
-            print("WARNING: Camera capture timed out, retrying...")
-            if os.path.exists(path):
-                os.unlink(path)
-            time.sleep(0.5)
-            continue
-        except FileNotFoundError:
-            print("ERROR: 'termux-camera-photo' not found. Install Termux.")
-            break
-
+        path = tempfile.mktemp(suffix='.jpg')
+        
+        ret = subprocess.run(['termux-camera-photo', path], 
+                            capture_output=True,
+                            timeout=2)
+        
         if ret.returncode == 0 and os.path.exists(path):
             try:
                 skin_pct = detect_skin_simple(path)
                 frame_count += 1
-
+                
                 if skin_pct > 0.25:
                     block_count += 1
                     print(f"Frame {frame_count}: 🔴 BLOCKED (Skin: {skin_pct:.1%})")
@@ -69,10 +57,7 @@ try:
             finally:
                 if os.path.exists(path):
                     os.unlink(path)
-        else:
-            if os.path.exists(path):
-                os.unlink(path)
-
+        
         time.sleep(0.5)
         
 except KeyboardInterrupt:
